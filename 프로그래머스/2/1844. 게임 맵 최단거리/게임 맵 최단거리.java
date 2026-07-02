@@ -24,7 +24,9 @@ class Solution {
             c = cur[1];
             cnt = cur[2];
             
+            // 상대 팀 진영에 도착
             if (r == n-1 && c == m-1) {
+                // 지나가야 하는 칸의 개수의 최솟값 return 
                 return cnt;
             }
             
