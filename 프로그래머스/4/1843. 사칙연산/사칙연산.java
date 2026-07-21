@@ -22,14 +22,18 @@ class Solution {
                 
                 for (int m=s; m<e; m++) {
                     String op = arr[m*2+1]; // 연산자
+                    int min, max;
                     
                     if (op.equals("+")) { // 덧셈
-                        minDp[s][e] = Math.min(minDp[s][e], minDp[s][m] + minDp[m+1][e]);
-                        maxDp[s][e] = Math.max(maxDp[s][e], maxDp[s][m] + maxDp[m+1][e]);
-                    } else if (op.equals("-")) { // 뺄셈
-                        minDp[s][e] = Math.min(minDp[s][e], minDp[s][m] - maxDp[m+1][e]);
-                        maxDp[s][e] = Math.max(maxDp[s][e], maxDp[s][m] - minDp[m+1][e]);
+                        min = minDp[s][m] + minDp[m+1][e];
+                        max = maxDp[s][m] + maxDp[m+1][e];
+                    } else { // 뺄셈
+                        min = minDp[s][m] - maxDp[m+1][e];
+                        max = maxDp[s][m] - minDp[m+1][e];
                     }
+                    
+                    minDp[s][e] = Math.min(minDp[s][e], min);
+                    maxDp[s][e] = Math.max(maxDp[s][e], max);
                 }
             }
         }
