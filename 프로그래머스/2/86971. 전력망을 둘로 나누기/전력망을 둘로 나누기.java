@@ -2,6 +2,7 @@ import java.util.*;
 
 class Solution {
     private List<List<Integer>> lines; // 전선 연결 정보
+    private boolean[] visited;
     
     public int solution(int n, int[][] wires) {
         init(n, wires);
@@ -12,8 +13,10 @@ class Solution {
             int v1 = wire[0];
             int v2 = wire[1];
             
+            Arrays.fill(visited, false);
+            
             // v1 v2 전선을 끊음
-            int a = dfs(v1, v1, v2, new boolean[n+1]); // a그룹
+            int a = dfs(v1, v1, v2); // a그룹
             int b = n - a; // b그룹
             
             // 두 전력망이 가지고 있는 송전탑 개수의 차이(절대값)
@@ -23,7 +26,7 @@ class Solution {
         return answer;
     }
     
-    private int dfs(int cur, int v1, int v2, boolean[] visited) {
+    private int dfs(int cur, int v1, int v2) {
         visited[cur] = true;
         
         int cnt = 1; // 연결된 송전탑 개수
@@ -34,7 +37,7 @@ class Solution {
                 continue;
             }
             
-            cnt += dfs(next, v1, v2, visited);
+            cnt += dfs(next, v1, v2);
         }
         
         return cnt;
@@ -42,6 +45,7 @@ class Solution {
     
     private void init(int n, int[][] wires) {
         lines = new ArrayList<>(n+1);
+        visited = new boolean[n+1];
         
         for (int i=0; i<=n; i++) {
             lines.add(new ArrayList<>());
