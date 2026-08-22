@@ -1,0 +1,5 @@
+-- 고양이와 개가 각각 몇 마리인지 조회하는 SQL문을 작성
+SELECT ANIMAL_TYPE, COUNT(*) count
+FROM ANIMAL_INS  
+GROUP BY ANIMAL_TYPE
+ORDER BY ANIMAL_TYPE ASC;
