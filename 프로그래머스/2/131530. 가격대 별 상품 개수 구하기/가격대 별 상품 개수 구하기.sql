@@ -1,0 +1,8 @@
+-- 만원 단위의 가격대 별로 상품 개수를 출력하는 SQL 문을 작성
+-- 가격대를 기준으로 오름차순 정렬
+SELECT 
+    TRUNCATE(PRICE, -4) AS PRICE_GROUP, 
+    COUNT(PRODUCT_ID) AS PRODUCTS 
+FROM PRODUCT 
+GROUP BY PRICE_GROUP 
+ORDER BY PRICE_GROUP ASC;
